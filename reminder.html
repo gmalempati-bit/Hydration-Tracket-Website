@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminders - Hydration Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand text-primary fw-bold" href="index.html">Hydration Tracker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-dark" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark active" href="reminder.html">Reminders</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Reminders Section -->
+    <section class="container text-center my-5">
+        <h2 class="text-primary">Set Your Water Intake Reminders</h2>
+        <p>Stay hydrated by setting personalized reminders.</p>
+
+        <!-- Reminder Form -->
+        <div class="card p-4 shadow mb-4 mx-auto" style="max-width: 500px;">
+            <h4 class="text-success">Add a New Reminder</h4>
+            <form id="reminderForm">
+                <label for="reminderTime" class="form-label">Select Reminder Time:</label>
+                <input type="time" id="reminderTime" class="form-control mb-3" required>
+                <button type="button" class="btn btn-success w-100" onclick="addReminder()">Add Reminder</button>
+            </form>
+        </div>
+
+        <!-- Active Reminders List -->
+        <div class="card p-4 shadow mb-4 mx-auto" style="max-width: 600px;">
+            <h4 class="text-primary">Your Active Reminders</h4>
+            <p class="text-muted">Below are your scheduled hydration reminders.</p>
+            <ul id="reminderList" class="list-group">
+                <li class="list-group-item text-muted">No active reminders</li>
+            </ul>
+        </div>
+
+        <!-- Hydration Tips Section -->
+        <div class="card p-4 shadow mb-4 mx-auto" style="max-width: 700px;">
+            <h4 class="text-info">💡 Hydration Tips 💡</h4>
+            <p id="hydrationTip">Drinking enough water helps maintain energy and focus throughout the day!</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto position-relative bottom-0 w-100">
+        <p>&copy; 2025 Hydration Tracker | Stay Healthy</p>
+    </footer>
+
+    <script>
+        function addReminder() {
+            const timeInput = document.getElementById("reminderTime").value;
+            if (!timeInput) return;
+
+            const reminderList = document.getElementById("reminderList");
+            const newReminder = document.createElement("li");
+            newReminder.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+            newReminder.innerHTML = `${timeInput} <button class='btn btn-danger btn-sm' onclick='removeReminder(this)'>Remove</button>`;
+            
+            reminderList.appendChild(newReminder);
+        }
+        
+        function removeReminder(button) {
+            button.parentElement.remove();
+        }
+
+        const hydrationTips = [
+            "Drinking enough water helps maintain energy and focus.",
+            "Set reminders to stay hydrated throughout your busy day!",
+            "Hydration is essential for skin health and digestion.",
+            "Your body needs water to regulate temperature and function properly.",
+            "Drinking a glass of water before meals can help digestion.",
+            "Keep a water bottle with you throughout the day as a reminder to stay hydrated.",
+            "Dehydration can cause headaches and fatigue—drink water regularly!",
+            "Proper hydration helps your muscles recover faster after exercise.",
+            "Drinking water first thing in the morning jumpstarts your metabolism.",
+            "Infuse your water with fruits or herbs for a refreshing twist!"
+        ];
+        function updateHydrationTip() {
+            document.getElementById("hydrationTip").innerText = hydrationTips[Math.floor(Math.random() * hydrationTips.length)];
+        }
+        updateHydrationTip();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
